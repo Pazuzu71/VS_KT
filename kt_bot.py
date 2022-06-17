@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import telebot
 from config import token, admin_id, url
 import time
-
+from datetime import datetime
 
 bot = telebot.TeleBot(token)
 
@@ -28,7 +28,7 @@ def check_KT():
     table = tables[1].find('table', class_="nil")
     b = table.find_all('b')
     b = [x.text for x in b]
-    print('b[1] > b[3]', b[1] > b[3])
+    print(f'{datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M")}', b[1] > b[3])
     return b[1] > b[3]
 
 
@@ -51,4 +51,4 @@ if __name__ == '__main__':
         try:
             bot.polling(none_stop=True, interval=0, timeout=20)
         except Exception as ex:
-            print('Exception')
+            print('Exception', ex)
